@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.js.sb_rest_mvc_jpa.repository.User;
 import com.js.sb_rest_mvc_jpa.repository.UserRepository;
+import com.js.sb_rest_mvc_jpa.services.UserService;
 
 import jakarta.persistence.OptimisticLockException;
 
@@ -16,35 +17,39 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @PostMapping
     public User createUser(@RequestBody User user) {
-        return userRepository.save(user);
+        return userService.createUser(user);
     }
 
     @GetMapping
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return userService.getAllUsers();
     }
 
+    @GetMapping("/id/{id}")
+    public String getUserName(@PathVariable Long id)  {
+        return userService.getUserName(id);
+    }
+    
     @GetMapping("/{email}")
     public User getUserByEmail(@PathVariable String email) throws ResourceNotFoundException {
     		if( email != null) 
     			throw new ResourceNotFoundException("Email not entered");
-        return userRepository.findByEmail(email);
+        return userService.findByEmail(email);
     }
     
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
-        User updated = userRepository.save(user);
+        User updated = userService.updateUser(id, user);
         return ResponseEntity.ok(updated);
     }
-    
     
   /*  @ExceptionHandler(ResourceNotFoundException.class)
     public String handleNotFound(ResourceNotFoundException ex, Model model)   
