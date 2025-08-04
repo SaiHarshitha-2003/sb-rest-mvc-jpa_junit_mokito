@@ -33,6 +33,11 @@ public class User {
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
+	public User(Long id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
     
  
 
