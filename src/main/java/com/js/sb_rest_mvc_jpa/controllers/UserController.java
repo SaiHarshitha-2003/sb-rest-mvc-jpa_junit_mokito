@@ -1,17 +1,12 @@
 package com.js.sb_rest_mvc_jpa.controllers;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.js.sb_rest_mvc_jpa.repository.User;
-import com.js.sb_rest_mvc_jpa.repository.UserRepository;
 import com.js.sb_rest_mvc_jpa.services.UserService;
 
-import jakarta.persistence.OptimisticLockException;
-
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
