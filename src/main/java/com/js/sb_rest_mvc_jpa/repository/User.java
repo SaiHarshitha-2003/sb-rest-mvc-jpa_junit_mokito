@@ -16,7 +16,11 @@ public class User {
  	@Version
     private Integer version;
  	
-    // Getters and setters
+    public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	// Getters and setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
